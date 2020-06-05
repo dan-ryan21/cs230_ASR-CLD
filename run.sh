@@ -14,9 +14,9 @@
 #  Default File Locations
 ##############################################################
 
-data_local = /data
-data_url = www.openslr.org/resources/12
-data_set = dev-clean.tar.gz
+data_local=/data
+data_url=www.openslr.org/resources/12
+data_set=dev-clean.tar.gz
 
 ##############################################################
 #  Create Local Data Directory
