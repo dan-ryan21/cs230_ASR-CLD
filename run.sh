@@ -24,6 +24,7 @@ data_set=dev-clean.tar.gz
 
 if [[ ! -e $data_local ]]; then
     mkdir $data_local
+fi
 
 ##############################################################
 #  Download Data
