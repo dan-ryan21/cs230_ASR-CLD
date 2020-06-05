@@ -14,7 +14,7 @@
 #  Default File Locations
 ##############################################################
 
-data_local=/data
+data_local=data
 data_url=www.openslr.org/resources/12
 data_set=dev-clean.tar.gz
 
@@ -22,7 +22,7 @@ data_set=dev-clean.tar.gz
 #  Create Local Data Directory
 ##############################################################
 
-if [[ ! -e $data_local ]]; then
+if [ ! -e $data_local ]; then
     mkdir $data_local
 fi
 
@@ -36,4 +36,4 @@ fi
 #  Decompress Data
 ##############################################################
 
-#. scripts/untar.sh ${data_set} ${data_local}
+#. scripts/decompress.sh ${data_set} ${data_local}
