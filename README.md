@@ -2,5 +2,5 @@
 
 To Execute enter the following commands:
 
-chmod +x run.sh
+chmod +x run.sh \n
 ./run.sh
