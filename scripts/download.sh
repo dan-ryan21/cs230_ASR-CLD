@@ -35,7 +35,9 @@ full_url=$data_url/$data_set
 
 echo "Downloading data from $full_url"
 
-if ! wget -P $data_local --no-check-certificate $full_url; then
-    echo "Error.  Download data from $full_url failed"
-    exit 1
+if [ ! -f $data_local/$data_set ]; then
+	if ! wget -P $data_local --no-check-certificate $full_url; then
+		echo "Error.  Download data from $full_url failed"
+		exit 1
+	fi
 fi
