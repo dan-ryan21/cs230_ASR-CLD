@@ -33,11 +33,12 @@ full_url=$data_url/$data_set
 #  Download Data
 ##############################################################
 
-echo "Downloading data from $full_url"
-
 if [ ! -f $data_local/$data_set ]; then
+    echo "Downloading data from $full_url"
 	if ! wget -P $data_local --no-check-certificate $full_url; then
 		echo "Error.  Download data from $full_url failed"
 		exit 1
 	fi
+else
+    echo "Data already exists"
 fi
