@@ -1,4 +1,6 @@
 # cs230_ASR-for-Childhood-Language-Development
 
-## chmod +x run.sh
-## ./run.sh
+To Execute enter the following commands:
+
+chmod +x run.sh
+./run.sh
