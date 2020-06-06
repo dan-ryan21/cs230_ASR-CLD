@@ -11,29 +11,31 @@
 ##############################################################
 
 ##############################################################
-#  Default File Locations
+#  Check Inputs
 ##############################################################
 
-data_local=data
-data_url=www.openslr.org/resources/12
-data_set=dev-clean.tar.gz
-
-##############################################################
-#  Create Local Data Directory
-##############################################################
-
-if [ ! -e $data_local ]; then
-    mkdir $data_local
+if [ $# -ne 3 ]; then
+    echo "Error.  Expected 3 inputs to download.sh"
+    exit 1
 fi
+
+##############################################################
+#  Assign Inputs
+##############################################################
+
+data_url=$1
+data_set=$2
+data_local=$3
+
+full_url=$data_url/$data_set
 
 ##############################################################
 #  Download Data
 ##############################################################
 
-. scripts/download.sh ${data_url} ${data_set} ${data_local}
+echo "Downloading data from $full_url"
 
-##############################################################
-#  Decompress Data
-##############################################################
-
-#. scripts/decompress.sh ${data_set} ${data_local}
+if ! wget -P $data_local --no-check-certificate $full_url; then
+    echo "Error.  Download data from $full_url failed"
+    exit 1
+fi
