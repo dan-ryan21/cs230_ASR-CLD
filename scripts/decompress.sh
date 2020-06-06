@@ -11,29 +11,28 @@
 ##############################################################
 
 ##############################################################
-#  Default File Locations
+#  Check Inputs
 ##############################################################
 
-data_local=data
-data_url=www.openslr.org/resources/12
-data_set=dev-clean.tar.gz
-
-##############################################################
-#  Create Local Data Directory
-##############################################################
-
-if [ ! -e $data_local ]; then
-    mkdir $data_local
+if [ $# -ne 2 ]; then
+    echo "Error.  Expected 2 inputs to decompress.sh"
+    exit 1
 fi
 
 ##############################################################
-#  Download Data
+#  Assign Inputs
 ##############################################################
 
-. scripts/download.sh ${data_url} ${data_set} ${data_local}
+data_set=$1
+data_local=$2
 
 ##############################################################
 #  Decompress Data
 ##############################################################
 
-. scripts/decompress.sh ${data_set} ${data_local}
+if ! tar -C $data_local -xvzf $data_local/$data_set; then
+    echo "Error. Un-tarring archive $data_set failed"
+    exit 1
+fi
+
+echo "Successfully un-tarred archive $data_set"
