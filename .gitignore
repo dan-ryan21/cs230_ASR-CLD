@@ -1,2 +1,5 @@
 # ignore contents of the data folder
 data/
+
+# ignore wget log
+wget-log
