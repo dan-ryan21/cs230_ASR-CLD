@@ -25,9 +25,10 @@
 #
 #####################################################################################################
 
-from keras.models import Model, Sequential
-from keras.layers import Dense, Activation, Dropout, Input, Masking, TimeDistributed, LSTM, Conv1D
-from keras.layers import GRU, Bidirectional, BatchNormalization, Reshape
+from keras.layers import Dense, Activation, Dropout, Input, TimeDistributed, Conv1D
+from keras.layers import GRU, BatchNormalization
+from keras.models import Model
+from asr_cld_constants import *
 
 
 #  Build the Keras Model
@@ -52,7 +53,7 @@ def getModel(input_shape):
     X = Dropout(rate=0.8)(X)
 
     # Time-distributed dense layer
-    X = TimeDistributed(Dense(1, activation="softmax"))(X)
+    X = TimeDistributed(Dense(getNumOfClasses(), activation="softmax"))(X)
 
     model = Model(inputs=X_input, outputs=X)
 
