@@ -57,7 +57,7 @@ for wavFile in os.listdir(testAudioDirectory):
     x = np.transpose(x)
     X[0, :, :] = x
     y = model.predict(X)
-    prediction = np.argmax(y[0, :, :], axis=-1)
+    prediction = np.argmax(y[0, :, :], axis=-2)
     np.savetxt(testPredictDirectory + "/predict" + str(i) + ".csv", prediction, delimiter=",")
     i += 1
 
