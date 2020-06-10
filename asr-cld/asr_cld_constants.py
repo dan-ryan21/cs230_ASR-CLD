@@ -29,7 +29,7 @@ def getNfreq():
 
 # Timesteps in model output
 def getTy():
-    return 1500
+    return 1375
 
 
 # The number os samples in the train set

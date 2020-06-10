@@ -17,6 +17,7 @@
 
 from model import *
 from asr_cld_constants import *
+import numpy as np
 
 Tx = getTx()
 n_freq = getNfreq()
@@ -24,3 +25,12 @@ n_freq = getNfreq()
 # Load the saved model
 model = getModel(input_shape=(Tx, n_freq))
 model.load_weights('models/tr_model.h5')
+
+# Get testing data
+X_dev = np.load('data/speech_commands_v0.01_edited/dev/X.npy')
+Y_dev = np.load('data/speech_commands_v0.01_edited/dev/Y.npy')
+
+# Evaluate model on dev set
+loss, acc = model.evaluate(X_dev, Y_dev)
+print("Dev set accuracy = ", acc)
+
