@@ -1,0 +1,105 @@
+#####################################################################################################
+#  Dan Ryan
+#
+#  Stanford University - CS230 Deep Learning
+#
+#  06/05/2020
+#
+#  dryan2@stanford.edu
+#  dan_ryan21@hotmail.com
+#
+#  Builds the training and dev datasets used for the model.  Reads all of the previously generated
+#  audio files, takes their spectrograms, and appends them together in one set.  Reads all of the
+#  previously generated labeled files and appends them together in one set.  Saves these master sets
+#  as npy files so that they can be easily loaded when training and evaluating the model.
+#
+#  Training data was created by randomly overlaying positive/negative search words over a random
+#  background signal.  Dev data was recorded on a Logitech webcam microphone and labelled manually.
+#
+#  NOTE:  This process was modeled from the Coursera Trigger Word Detection programming assignment.
+#  It has been modified to accomodate multiple labels.
+#
+#####################################################################################################
+
+import os
+import numpy as np
+from audio_processing import *
+from asr_cld_constants import *
+
+# Location of data files
+trainDirectory = 'data/speech_commands_v0.01_edited/train'
+trainAudioDirectory = trainDirectory + '/audio'
+trainLabelDirectory = trainDirectory + '/labels'
+trainXfile = trainDirectory + '/X.npy'
+trainYfile = trainDirectory + '/Y.npy'
+devDirectory = 'data/speech_commands_v0.01_edited/dev'
+devAudioDirectory = devDirectory + '/audio'
+devLabelDirectory = devDirectory + '/labels'
+devXfile = devDirectory + '/X.npy'
+devYfile = devDirectory + '/Y.npy'
+
+# Load Constants
+Tx = getTx()
+Ty = getTy()
+n_freq = getNfreq()
+m_dev = getDevSetSize()
+m_train = getTrainSetSize()
+
+# Initialize X-dev
+X = np.empty((n_freq, Tx, m_dev))
+i = 0
+
+# Insert all dev samples in X
+for wavFile in os.listdir(devAudioDirectory):
+    wavPath = devAudioDirectory + '/' + wavFile
+    x = graph_spectrogram(wavPath)
+    X[:, :, i] = x
+    i += 1
+
+# Save X-dev
+np.save(devXfile, X)
+
+# Initialize Y-dev
+Y = np.empty((1, Ty, m_dev))
+i = 0
+
+# Insert all dev labels in Y
+for labelFile in os.listdir(devLabelDirectory):
+    labelPath = devLabelDirectory + '/' + labelFile
+    y = np.loadtxt(labelPath, delimiter=',')
+    y = np.reshape(y, (1, Ty))
+    Y[0, :, i] = y
+    i += 1
+
+# Save Y-dev
+np.save(devYfile, Y)
+
+# Initialize X-train
+X = np.empty((n_freq, Tx, m_train))
+i = 0
+
+# Insert all train samples in X
+for wavFile in os.listdir(trainAudioDirectory):
+    wavPath = trainAudioDirectory + '/' + wavFile
+    x = graph_spectrogram(wavPath)
+    X[:, :, i] = x
+    i += 1
+
+# Save X-train
+np.save(trainXfile, X)
+
+# Initialize Y-train
+Y = np.empty((1, Ty, m_train))
+i = 0
+
+# Insert all train labels in Y
+for labelFile in os.listdir(trainLabelDirectory):
+    labelPath = trainLabelDirectory + '/' + labelFile
+    y = np.loadtxt(labelPath, delimiter=',')
+    y = np.reshape(y, (1, Ty))
+    Y[0, :, i] = y
+    i += 1
+
+# Save Y-train
+np.save(trainYfile, Y)
+

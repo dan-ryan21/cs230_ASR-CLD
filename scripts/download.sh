@@ -15,7 +15,7 @@
 ##############################################################
 
 if [ $# -ne 3 ]; then
-    echo "Error.  Expected 3 inputs to download.sh"
+    echo -e "\n*** Error.  Expected 3 inputs to download.sh ***\n"
     exit 1
 fi
 
@@ -27,18 +27,19 @@ data_url=$1
 data_set=$2
 data_local=$3
 
-full_url=$data_url/$data_set
+tar_file=$data_set.tar.gz
+full_url=$data_url/$tar_file
 
 ##############################################################
 #  Download Data
 ##############################################################
 
-if [ ! -f $data_local/$data_set ]; then
-    echo "Downloading data from $full_url"
+if [ ! -f $data_local/$tar_file ]; then
+    echo -e "\n*** Downloading data from $full_url ***\n"
 	if ! wget -P $data_local --no-check-certificate $full_url; then
-		echo "Error.  Download data from $full_url failed"
+		echo -e "\n*** Error.  Download data from $full_url failed ***\n"
 		exit 1
 	fi
 else
-    echo "Data already exists"
+    echo "\n*** Data already exists ***\n"
 fi

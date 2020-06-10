@@ -14,8 +14,8 @@
 #  Check Inputs
 ##############################################################
 
-if [ $# -ne 2 ]; then
-    echo -e "\n*** Error.  Expected 2 inputs to decompress.sh ***\n"
+if [ $# -ne 1 ]; then
+    echo -e "\n*** Error.  Expected 1 input to convert.sh ***\n"
     exit 1
 fi
 
@@ -23,18 +23,25 @@ fi
 #  Assign Inputs
 ##############################################################
 
-data_set=$1
-data_local=$2
-
-tar_file=$data_set.tar.gz
+data_folder=$1
 
 ##############################################################
-#  Decompress Data
+#  Convert .flac files to .wav
 ##############################################################
 
-if ! tar -C $data_local -xvzf $data_local/$tar_file; then
-    echo -e "\n*** Error. Un-tarring archive $tar_file failed ***\n"
-    exit 1
-fi
+echo -e "\n*** Converting .flac files to .wav format.  This may take a while. ***\n"
 
-echo -e "\n*** Successfully un-tarred archive $tar_file ***\n"
+for readerFolder in $data_folder/*/; do
+    for chapterFolder in $readerFolder*/; do
+	    for flacFile in $chapterFolder*.flac; do
+		    baseFile="${flacFile%.*}"
+			wavFile=$baseFile.wav
+			
+			if [ ! -f $wavFile ]; then
+				ffmpeg -v quiet -i $flacFile $wavFile
+			fi
+			
+			rm -f $flacFile
+		done
+	done
+done
