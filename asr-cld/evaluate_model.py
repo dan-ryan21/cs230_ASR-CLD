@@ -17,8 +17,10 @@
 
 from model import *
 from asr_cld_constants import *
+from audio_processing import *
 import numpy as np
 from keras.optimizers import Adam
+import os
 
 Tx = getTx()
 n_freq = getNfreq()
@@ -37,5 +39,24 @@ Y_dev = np.load('data/speech_commands_v0.01_edited/dev/Y.npy')
 
 # Evaluate model on dev set
 loss, acc = model.evaluate(X_dev, Y_dev)
-print("Dev set accuracy = ", acc)
+print("*** Dev set accuracy = ", acc)
 
+# Predict on test set
+testAudioDirectory = 'data/speech_commands_v0.01_edited/test/audio'
+testPredictDirectory = 'data/speech_commands_v0.01_edited/test/predict'
+
+if not os.path.exists(testPredictDirectory):
+    os.mkdir(testPredictDirectory)
+
+i = 0
+
+for wavFile in os.listdir(testAudioDirectory):
+    wavPath = testAudioDirectory + '/' + wavFile
+    x = graph_spectrogram(wavPath)
+    x = x.swapaxes(0, 1)
+    y = model.predict(x)
+    prediction = np.argmax(y, axis=-1)
+    np.savetxt(testPredictDirectory + "/predict" + str(i) + ".csv", y, delimiter=",")
+    i += 1
+
+print("\n*** Predictions on test set saved at data/speech_commands_v0.01_edited/test/predict")
