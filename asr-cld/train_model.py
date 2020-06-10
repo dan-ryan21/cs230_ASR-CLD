@@ -21,6 +21,11 @@ from keras.optimizers import Adam
 from keras.callbacks import ModelCheckpoint
 import numpy as np
 import os
+import sys
+
+# Read input arguments
+batch_size = int(sys.argv[1])
+epochs = int(sys.argv[2])
 
 Tx = getTx()
 n_freq = getNfreq()
@@ -48,4 +53,4 @@ if not os.path.exists(model_directory):
 checkpoint = ModelCheckpoint(filepath=model_path, monitor='acc', mode='max', save_best_only=True)
 
 # Train the model
-model.fit(X, Y, batch_size=100, epochs=100, callbacks=[checkpoint])
+model.fit(X, Y, batch_size=batch_size, epochs=epochs, callbacks=[checkpoint])

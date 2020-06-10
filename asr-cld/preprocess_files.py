@@ -14,7 +14,8 @@
 #
 #####################################################################################################
 
-import os, sys
+import os
+import sys
 
 # Read input arguments
 rootDirectory = sys.argv[1]
