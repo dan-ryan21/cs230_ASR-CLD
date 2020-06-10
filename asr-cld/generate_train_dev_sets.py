@@ -48,14 +48,14 @@ m_train = getTrainSetSize()
 nc = getNumOfClasses()
 
 # Initialize X-dev
-X = np.empty((n_freq, Tx, m_dev))
+X = np.empty((m_dev, n_freq, Tx))
 i = 0
 
 # Insert all dev samples in X
 for wavFile in os.listdir(devAudioDirectory):
     wavPath = devAudioDirectory + '/' + wavFile
     x = graph_spectrogram(wavPath)
-    X[:, :, i] = x
+    X[i, :, :] = x
     i += 1
 
 # Save X-dev
@@ -78,14 +78,14 @@ for labelFile in os.listdir(devLabelDirectory):
 np.save(devYfile, Y)
 
 # Initialize X-train
-X = np.empty((n_freq, Tx, m_train))
+X = np.empty((m_train, n_freq, Tx))
 i = 0
 
 # Insert all train samples in X
 for wavFile in os.listdir(trainAudioDirectory):
     wavPath = trainAudioDirectory + '/' + wavFile
     x = graph_spectrogram(wavPath)
-    X[:, :, i] = x
+    X[i, :, :] = x
     i += 1
 
 # Save X-train
