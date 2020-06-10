@@ -63,7 +63,7 @@ nc = getNumOfClasses()
 # np.save(devXfile, X)
 #
 # # Initialize Y-dev
-# Y = np.empty((m_dev, nc, Ty))
+# Y = np.empty((m_dev, Ty, nc))
 # i = 0
 #
 # # Insert all one-hot encoded dev labels in Y
@@ -71,7 +71,7 @@ nc = getNumOfClasses()
 #     labelPath = devLabelDirectory + '/' + labelFile
 #     y = np.loadtxt(labelPath, delimiter=',')
 #     y_onehot = to_categorical(y, num_classes=nc)
-#     y_onehot = np.transpose(y_onehot)
+#     #y_onehot = np.transpose(y_onehot)
 #     Y[i, :, :] = y_onehot
 #     i += 1
 #
@@ -94,7 +94,7 @@ for wavFile in os.listdir(trainAudioDirectory):
 np.save(trainXfile, X)
 
 # Initialize Y-train
-Y = np.empty((m_train, nc, Ty))
+Y = np.empty((m_train, Ty, nc))
 i = 0
 
 # Insert all one-hot encoded train labels in Y
@@ -102,7 +102,7 @@ for labelFile in os.listdir(trainLabelDirectory):
     labelPath = trainLabelDirectory + '/' + labelFile
     y = np.loadtxt(labelPath, delimiter=',')
     y_onehot = to_categorical(y, num_classes=nc)
-    y_onehot = np.transpose(y_onehot)
+    #y_onehot = np.transpose(y_onehot)
     Y[i, :, :] = y_onehot
     i += 1
 
