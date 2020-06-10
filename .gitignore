@@ -1,5 +1,5 @@
-# ignore contents of the data folder
-data/
+# ignore compiled code
+*.pyc
 
 # ignore wget log
 wget-log
