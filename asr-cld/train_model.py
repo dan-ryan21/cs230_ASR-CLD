@@ -40,7 +40,7 @@ X = np.load('data/speech_commands_v0.01_edited/train/X.npy')
 Y = np.load('data/speech_commands_v0.01_edited/train/Y.npy')
 
 # Train the model
-model.fit(X, Y, batch_size=50, epochs=100)
+model.fit(X, Y, batch_size=100, epochs=100)
 
 # Save the model
 if not os.path.exists('models/'):
