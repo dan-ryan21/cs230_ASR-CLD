@@ -18,6 +18,7 @@
 from model import *
 from asr_cld_constants import *
 import numpy as np
+from keras.optimizers import Adam
 
 Tx = getTx()
 n_freq = getNfreq()
@@ -25,6 +26,10 @@ n_freq = getNfreq()
 # Load the saved model
 model = getModel(input_shape=(Tx, n_freq))
 model.load_weights('models/tr_model.h5')
+
+# Compile the model, Adam optimizer
+opt = Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, decay=0.01)
+model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=["accuracy"])
 
 # Get testing data
 X_dev = np.load('data/speech_commands_v0.01_edited/dev/X.npy')

@@ -18,6 +18,7 @@
 from model import *
 from asr_cld_constants import *
 from keras.optimizers import Adam
+from keras.callbacks import ModelCheckpoint
 import numpy as np
 import os
 
@@ -29,21 +30,22 @@ model = getModel(input_shape=(Tx, n_freq))
 # Display the model summary
 model.summary()
 
-# Use an Adam optimizer
+# Compile the model, Adam optimizer
 opt = Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, decay=0.01)
-
-# Compile the model
 model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=["accuracy"])
 
 # Get training data
 X = np.load('data/speech_commands_v0.01_edited/train/X.npy')
 Y = np.load('data/speech_commands_v0.01_edited/train/Y.npy')
 
+# Setup checkpointing
+model_directory = 'models/'
+model_path = model_directory + 'tr_model.h5'
+
+if not os.path.exists(model_directory):
+    os.mkdir(model_directory)
+
+checkpoint = ModelCheckpoint(filepath=model_path, save_best_only=True)
+
 # Train the model
-model.fit(X, Y, batch_size=100, epochs=100)
-
-# Save the model
-if not os.path.exists('models/'):
-    os.mkdir('models/')
-
-model.save_weights('models/tr_model.h5')
+model.fit(X, Y, batch_size=100, epochs=100, callbacks=[checkpoint])
