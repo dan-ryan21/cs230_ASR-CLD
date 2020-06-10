@@ -42,6 +42,11 @@ def getDevSetSize():
     return 26
 
 
+# The number os samples in the test set
+def getTestSetSize():
+    return 5
+
+
 # The maximum number of positive clips to insert
 def getNumOfPositives():
     return 3

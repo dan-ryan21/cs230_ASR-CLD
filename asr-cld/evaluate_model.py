@@ -48,13 +48,15 @@ testPredictDirectory = 'data/speech_commands_v0.01_edited/test/predict'
 if not os.path.exists(testPredictDirectory):
     os.mkdir(testPredictDirectory)
 
+X = np.empty((1, Tx, n_freq))
 i = 0
 
 for wavFile in os.listdir(testAudioDirectory):
     wavPath = testAudioDirectory + '/' + wavFile
     x = graph_spectrogram(wavPath)
-    x = x.swapaxes(0, 1)
-    y = model.predict(x)
+    x = np.transpose(x)
+    X[0, :, :] = x
+    y = model.predict(X)
     prediction = np.argmax(y, axis=-1)
     np.savetxt(testPredictDirectory + "/predict" + str(i) + ".csv", y, delimiter=",")
     i += 1

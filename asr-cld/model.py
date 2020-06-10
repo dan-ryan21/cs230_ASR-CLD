@@ -39,18 +39,18 @@ def getModel(input_shape):
     X = Conv1D(filters=196, kernel_size=15, strides=4)(X_input)
     X = BatchNormalization()(X)
     X = Activation("relu")(X)
-    X = Dropout(rate=0.8)(X)
+    X = Dropout(rate=0.2)(X)
 
     # GRU Layer
     X = GRU(units=128, return_sequences=True)(X)
-    X = Dropout(rate=0.8)(X)
+    X = Dropout(rate=0.2)(X)
     X = BatchNormalization()(X)
 
     # GRU Layer
     X = GRU(units=128, return_sequences=True)(X)
-    X = Dropout(rate=0.8)(X)
+    X = Dropout(rate=0.2)(X)
     X = BatchNormalization()(X)
-    X = Dropout(rate=0.8)(X)
+    X = Dropout(rate=0.2)(X)
 
     # Time-distributed dense layer
     X = TimeDistributed(Dense(getNumOfClasses(), activation="softmax"))(X)
