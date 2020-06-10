@@ -11,7 +11,7 @@
 
 #### To begin, clone this repository and execute all commands from the root directory
 
-#### The model can be executed end-to-end through a script by executing the command below.  This script will build the train/dev datasets, train the model with default parameters (selected such that the model should train in ~ 10 mins), and then evaluate the model on the dev/test datasets.
+#### The model can be executed end-to-end through a script by executing the command below.  This script will build the train/dev datasets, train the model with default parameters (selected such that the model should train in ~ 10 mins), and then evaluate the model on the dev/test datasets.  Even though the model will be trained with default parameters, the model will be evaluated with our best model to-date.  To select a different model, see the evaluate model stage below.
 
 * ./run.sh
 
