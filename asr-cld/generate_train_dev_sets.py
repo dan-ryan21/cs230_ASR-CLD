@@ -71,6 +71,7 @@ nc = getNumOfClasses()
 #     labelPath = devLabelDirectory + '/' + labelFile
 #     y = np.loadtxt(labelPath, delimiter=',')
 #     y_onehot = to_categorical(y, num_classes=nc)
+#     y_onehot = np.transpose(y_onehot)
 #     Y[i, :, :] = y_onehot
 #     i += 1
 #
@@ -101,6 +102,7 @@ for labelFile in os.listdir(trainLabelDirectory):
     labelPath = trainLabelDirectory + '/' + labelFile
     y = np.loadtxt(labelPath, delimiter=',')
     y_onehot = to_categorical(y, num_classes=nc)
+    y_onehot = np.transpose(y_onehot)
     Y[i, :, :] = y_onehot
     i += 1
 
