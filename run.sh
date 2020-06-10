@@ -18,7 +18,7 @@ python asr-cld/generate_dataset.py
 python asr-cld/generate_train_dev_sets.py
 
 ###  Train the model (inputs = batch size, epochs)
-python asr-cld/train_model.py 20 10
+python asr-cld/train_model.py 200 10
 
 ###  Evaluate the model
 python asr-cld/evaluate_model.py
