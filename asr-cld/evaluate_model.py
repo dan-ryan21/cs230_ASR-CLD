@@ -21,13 +21,21 @@ from audio_processing import *
 import numpy as np
 from keras.optimizers import Adam
 import os
+import sys
+
+# Read input arguments
+if len(sys.argv) == 2:
+    model_name = sys.argv[1]
+    model_path = 'models/' + model_name
+else:
+    model_path = 'models/tr_model.h5'
 
 Tx = getTx()
 n_freq = getNfreq()
 
 # Load the saved model
 model = getModel(input_shape=(Tx, n_freq))
-model.load_weights('models/tr_model.h5')
+model.load_weights(model_path)
 
 # Compile the model, Adam optimizer
 opt = Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, decay=0.01)
