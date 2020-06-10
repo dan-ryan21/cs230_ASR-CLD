@@ -25,7 +25,7 @@
 
 #### The command below will then train the model with the specified batch size and number of epochs
 
-* python asr-cld/train_model.py  $batch_size $num_epochs
+* python asr-cld/train_model.py  *batch_size *num_epochs
 
 #### Finally, the model can be evaluated with the following command.  The model will be evaluated against the dev training set, with accuracy reported.  Then, predictions will be made against the test set and the predictions will be saved to files.
 
