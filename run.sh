@@ -21,4 +21,4 @@ python asr-cld/generate_train_dev_sets.py
 python asr-cld/train_model.py 200 10
 
 ###  Evaluate the model
-python asr-cld/evaluate_model.py
+python asr-cld/evaluate_model.py best_model.h5
