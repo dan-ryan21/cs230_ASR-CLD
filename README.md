@@ -1,10 +1,10 @@
 # cs230_ASR-for-Childhood-Language-Development
 
-###### This project is intended to run on an AWS Deep Learning AMI (Ubuntu 16.04) instance, preferably with at least one GPU (p2.xlarge recommended).  Before running, you should activate the tensorflow_p36 environment with the following statement:
+#### This project is intended to run on an AWS Deep Learning AMI (Ubuntu 16.04) instance, preferably with at least one GPU (p2.xlarge recommended).  Before running, you should activate the tensorflow_p36 environment with the following statement:
 
 * source activate tensorflow_p36
 
-###### Additionally, you may need to manually install the following packages:
+#### Additionally, you may need to manually install the following packages:
 
 * pydub ------- pip install pydub
 * ffmpeg ------ sudo apt-get install ffmpeg 
