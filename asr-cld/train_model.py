@@ -45,7 +45,7 @@ model_path = model_directory + 'tr_model.h5'
 if not os.path.exists(model_directory):
     os.mkdir(model_directory)
 
-checkpoint = ModelCheckpoint(filepath=model_path, save_best_only=True)
+checkpoint = ModelCheckpoint(filepath=model_path, monitor='acc', mode='max', save_best_only=True)
 
 # Train the model
 model.fit(X, Y, batch_size=100, epochs=100, callbacks=[checkpoint])
