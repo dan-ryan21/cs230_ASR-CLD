@@ -55,6 +55,7 @@ i = 0
 for wavFile in os.listdir(devAudioDirectory):
     wavPath = devAudioDirectory + '/' + wavFile
     x = graph_spectrogram(wavPath)
+    x = np.transpose(x)
     X[i, :, :] = x
     i += 1
 
@@ -85,6 +86,7 @@ i = 0
 for wavFile in os.listdir(trainAudioDirectory):
     wavPath = trainAudioDirectory + '/' + wavFile
     x = graph_spectrogram(wavPath)
+    x = np.transpose(x)
     X[i, :, :] = x
     i += 1
 

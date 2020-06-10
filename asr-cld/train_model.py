@@ -24,7 +24,7 @@ import os
 Tx = getTx()
 n_freq = getNfreq()
 
-model = getModel(input_shape=(n_freq, Tx))
+model = getModel(input_shape=(Tx, n_freq))
 
 # Display the model summary
 model.summary()
