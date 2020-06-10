@@ -58,7 +58,7 @@ for wavFile in os.listdir(testAudioDirectory):
     X[0, :, :] = x
     y = model.predict(X)
     prediction = np.argmax(y[0, :, :], axis=-1)
-    np.savetxt(testPredictDirectory + "/predict" + str(i) + ".csv", y, delimiter=",")
+    np.savetxt(testPredictDirectory + "/predict" + str(i) + ".csv", prediction, delimiter=",")
     i += 1
 
 print("\n*** Predictions on test set saved at data/speech_commands_v0.01_edited/test/predict")
