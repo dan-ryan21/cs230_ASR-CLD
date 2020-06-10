@@ -79,7 +79,7 @@ for i in range(num_of_samples):
     file_handle = data.export("data/speech_commands_v0.01_edited/train/audio/train" + str(i) + ".wav", format="wav")
     np.savetxt("data/speech_commands_v0.01_edited/train/labels/label" + str(i) + ".csv", y, delimiter=",")
 
-    if i % 1000 == 0:
+    if i % 200 == 0:
         print("*** Generating Dataset = " + str(i*100/num_of_samples) + "% Complete\r"),
 
     file_handle.close()

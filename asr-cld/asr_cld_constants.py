@@ -34,7 +34,7 @@ def getTy():
 
 # The number os samples in the train set
 def getTrainSetSize():
-    return 10000
+    return 2000
 
 
 # The number os samples in the train set
