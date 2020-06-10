@@ -21,6 +21,6 @@ from asr_cld_constants import *
 Tx = getTx()
 n_freq = getNfreq()
 
+# Load the saved model
 model = getModel(input_shape=(Tx, n_freq))
-
 model.load_weights('models/tr_model.h5')

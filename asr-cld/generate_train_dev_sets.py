@@ -48,7 +48,7 @@ m_train = getTrainSetSize()
 nc = getNumOfClasses()
 
 # Initialize X-dev
-X = np.empty((m_dev, n_freq, Tx))
+X = np.empty((m_dev, Tx, n_freq))
 i = 0
 
 # Insert all dev samples in X
@@ -79,7 +79,7 @@ for labelFile in os.listdir(devLabelDirectory):
 np.save(devYfile, Y)
 
 # Initialize X-train
-X = np.empty((m_train, n_freq, Tx))
+X = np.empty((m_train, Tx, n_freq))
 i = 0
 
 # Insert all train samples in X
