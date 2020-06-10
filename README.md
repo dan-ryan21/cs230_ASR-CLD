@@ -9,24 +9,24 @@
 * pydub ------- pip install pydub
 * ffmpeg ------ sudo apt-get install ffmpeg 
 
-###### To begin, clone this repository and execute all commands from the root directory
+#### To begin, clone this repository and execute all commands from the root directory
 
-###### The model can be executed end-to-end through a script by executing the command below.  This script will build the train/dev datasets, train the model with default parameters (selected such that the model should train in ~ 10 mins), and then evaluate the model on the dev/test datasets.
+#### The model can be executed end-to-end through a script by executing the command below.  This script will build the train/dev datasets, train the model with default parameters (selected such that the model should train in ~ 10 mins), and then evaluate the model on the dev/test datasets.
 
 * ./run.sh
 
-###### Additionally, each stage in the pipeline can be executed individually.  The command below builds the dataset used for the training examples.  This involves overlaying randomly selected positive/negative words on a randomly selected background signal.
+#### Additionally, each stage in the pipeline can be executed individually.  The command below builds the dataset used for the training examples.  This involves overlaying randomly selected positive/negative words on a randomly selected background signal.
 
 * python asr-cld/generate_dataset.py
 
-###### The command below will then assemble the training and dev sets into numpy objects that can be quickly loaded during the training/evaluation stages
+#### The command below will then assemble the training and dev sets into numpy objects that can be quickly loaded during the training/evaluation stages
 
 * python asr-cld/generate_train_dev_sets.py
 
-###### The command below will then train the model with the specified batch size and number of epochs
+#### The command below will then train the model with the specified batch size and number of epochs
 
 * python asr-cld/train_model.py  $batch_size $num_epochs
 
-###### Finally, the model can be evaluated with the following command.  The model will be evaluated against the dev training set, with accuracy reported.  Then, predictions will be made against the test set and the predictions will be saved to files.
+#### Finally, the model can be evaluated with the following command.  The model will be evaluated against the dev training set, with accuracy reported.  Then, predictions will be made against the test set and the predictions will be saved to files.
 
 * python asr-cld/evaluate_model.py
