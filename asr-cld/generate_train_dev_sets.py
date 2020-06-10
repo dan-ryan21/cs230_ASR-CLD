@@ -47,35 +47,35 @@ m_dev = getDevSetSize()
 m_train = getTrainSetSize()
 nc = getNumOfClasses()
 
-# Initialize X-dev
-X = np.empty((m_dev, Tx, n_freq))
-i = 0
-
-# Insert all dev samples in X
-for wavFile in os.listdir(devAudioDirectory):
-    wavPath = devAudioDirectory + '/' + wavFile
-    x = graph_spectrogram(wavPath)
-    x = np.transpose(x)
-    X[i, :, :] = x
-    i += 1
-
-# Save X-dev
-np.save(devXfile, X)
-
-# Initialize Y-dev
-Y = np.empty((m_dev, nc, Ty))
-i = 0
-
-# Insert all one-hot encoded dev labels in Y
-for labelFile in os.listdir(devLabelDirectory):
-    labelPath = devLabelDirectory + '/' + labelFile
-    y = np.loadtxt(labelPath, delimiter=',')
-    y_onehot = to_categorical(y, num_classes=nc)
-    Y[i, :, :] = y_onehot
-    i += 1
-
-# Save Y-dev
-np.save(devYfile, Y)
+# # Initialize X-dev
+# X = np.empty((m_dev, Tx, n_freq))
+# i = 0
+#
+# # Insert all dev samples in X
+# for wavFile in os.listdir(devAudioDirectory):
+#     wavPath = devAudioDirectory + '/' + wavFile
+#     x = graph_spectrogram(wavPath)
+#     x = np.transpose(x)
+#     X[i, :, :] = x
+#     i += 1
+#
+# # Save X-dev
+# np.save(devXfile, X)
+#
+# # Initialize Y-dev
+# Y = np.empty((m_dev, nc, Ty))
+# i = 0
+#
+# # Insert all one-hot encoded dev labels in Y
+# for labelFile in os.listdir(devLabelDirectory):
+#     labelPath = devLabelDirectory + '/' + labelFile
+#     y = np.loadtxt(labelPath, delimiter=',')
+#     y_onehot = to_categorical(y, num_classes=nc)
+#     Y[i, :, :] = y_onehot
+#     i += 1
+#
+# # Save Y-dev
+# np.save(devYfile, Y)
 
 # Initialize X-train
 X = np.empty((m_train, Tx, n_freq))
