@@ -25,6 +25,7 @@ import os
 import numpy as np
 from audio_processing import *
 from asr_cld_constants import *
+from keras.utils import to_categorical
 
 # Location of data files
 trainDirectory = 'data/speech_commands_v0.01_edited/train'
@@ -44,6 +45,7 @@ Ty = getTy()
 n_freq = getNfreq()
 m_dev = getDevSetSize()
 m_train = getTrainSetSize()
+nc = getNumOfClasses()
 
 # Initialize X-dev
 X = np.empty((n_freq, Tx, m_dev))
@@ -60,15 +62,16 @@ for wavFile in os.listdir(devAudioDirectory):
 np.save(devXfile, X)
 
 # Initialize Y-dev
-Y = np.empty((1, Ty, m_dev))
+Y = np.empty((nc, Ty, m_dev))
 i = 0
 
-# Insert all dev labels in Y
+# Insert all one-hot encoded dev labels in Y
 for labelFile in os.listdir(devLabelDirectory):
     labelPath = devLabelDirectory + '/' + labelFile
     y = np.loadtxt(labelPath, delimiter=',')
-    y = np.reshape(y, (1, Ty))
-    Y[0, :, i] = y
+    y_onehot = to_categorical(y, num_classes=nc)
+    y_onehot = np.transpose(y_onehot)
+    Y[:, :, i] = y_onehot
     i += 1
 
 # Save Y-dev
@@ -89,15 +92,16 @@ for wavFile in os.listdir(trainAudioDirectory):
 np.save(trainXfile, X)
 
 # Initialize Y-train
-Y = np.empty((1, Ty, m_train))
+Y = np.empty((nc, Ty, m_train))
 i = 0
 
-# Insert all train labels in Y
+# Insert all one-hot encoded train labels in Y
 for labelFile in os.listdir(trainLabelDirectory):
     labelPath = trainLabelDirectory + '/' + labelFile
     y = np.loadtxt(labelPath, delimiter=',')
-    y = np.reshape(y, (1, Ty))
-    Y[0, :, i] = y
+    y_onehot = to_categorical(y, num_classes=nc)
+    y_onehot = np.transpose(y_onehot)
+    Y[:, :, i] = y_onehot
     i += 1
 
 # Save Y-train

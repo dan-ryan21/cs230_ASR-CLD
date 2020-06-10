@@ -10,7 +10,7 @@
 #
 #  Definition of the model used to detect keywords.  The model takes as input a spectrogram and
 #  outputs a time series of labels corresponding to the words, if any, detected.  The labels for
-#  this implementation are as follows:
+#  this implementation are one-hot encoded according to the following schema:
 #
 #  0 - No word or unrecognized word detected
 #  1 - 'bird'

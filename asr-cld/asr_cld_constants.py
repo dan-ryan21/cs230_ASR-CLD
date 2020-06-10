@@ -50,3 +50,8 @@ def getNumOfPositives():
 # The maximum number of negative clips to insert
 def getNumOfNegatives():
     return 3
+
+
+# The number of output classes
+def getNumOfClasses():
+    return 7
