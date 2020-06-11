@@ -53,7 +53,11 @@ def getModel(input_shape):
     X = Dropout(rate=0.2)(X)
 
     # Time-distributed dense layer
-    X = TimeDistributed(Dense(getNumOfClasses(), activation="softmax"))(X)
+    #X = TimeDistributed(Dense(getNumOfClasses(), activation="softmax"))(X)
+    X = TimeDistributed(Dense(getNumOfClasses(), activation="sigmoid"))(X)
+
+    # Softmax output layer
+    X = Activation('softmax')(X)
 
     model = Model(inputs=X_input, outputs=X)
 
