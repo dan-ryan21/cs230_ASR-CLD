@@ -9,9 +9,9 @@
 * pydub ------- pip install pydub
 * ffmpeg ------ sudo apt-get install ffmpeg 
 
-#### To begin, clone this repository and execute all commands from the root directory
+#### To begin, clone this repository and move to the root directory before executing any of the following commands
 
-#### The model can be executed end-to-end through a script by executing the command below.  This script will build the train/dev datasets, train the model with default parameters (selected such that the model should train in ~ 10 mins), and then evaluate the model on the dev/test datasets.
+#### The model can be executed end-to-end through a script by executing the command below.  This script will build the train/dev datasets, train the model with default parameters (selected such that the model should train in ~ 10 mins), and then evaluate the model on the dev/test datasets.  Even though the model will be trained with default parameters, the model will be evaluated with our best model to-date.  To select a different model, see the evaluate model stage below.
 
 * ./run.sh
 
@@ -23,10 +23,10 @@
 
 * python asr-cld/generate_train_dev_sets.py
 
-#### The command below will then train the model with the specified batch size and number of epochs
+#### The command below will then train the model with the specified batch size and number of epochs.  The model parameters will be saved to the /models directory with the default tr_model.hr filename.
 
 * python asr-cld/train_model.py $batch_size $num_epochs
 
-#### Finally, the model can be evaluated with the following command.  The model will be evaluated against the dev training set, with accuracy reported.  Then, predictions will be made against the test set and the predictions will be saved to files.
+#### Finally, the model can be evaluated with the following command.  The model will be evaluated against the dev training set, with accuracy reported.  Then, predictions will be made against the test set and the predictions will be saved to files.  The name of the model to use can be passed as an argument.  If no argument is passed, the last training model will be used.  All models should be located in the /models directory.
 
-* python asr-cld/evaluate_model.py
+* python asr-cld/evaluate_model.py $model_name
